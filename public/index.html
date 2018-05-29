@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>W3bSockets</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+<h1>This is a switch.</h1>
+<div>
+	<input type="checkbox" id="light">
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io();
+
+	socket.on('connect', function() {
+		console.log('Connected!');
+	});
+
+	socket.on('message', (message) => {
+		console.log('a message from server. ');
+	});
+</script>
+</body>
+
+</html>

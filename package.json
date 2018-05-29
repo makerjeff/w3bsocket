@@ -1,0 +1,17 @@
+{
+  "name": "w3bsocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jefferson Wu <makerjeffwu@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "socket.io": "^2.1.1"
+  }
+}
