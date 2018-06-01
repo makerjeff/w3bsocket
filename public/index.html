@@ -4,25 +4,145 @@
 	<meta charset="utf-8">
 	<title>W3bSockets</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<style>
+		* {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		/* switch level styles */
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 34px;
+		}
+
+		/* hide the input */
+		.switch input {
+			display: none;
+		}
+
+		/* slider styles */
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: all 400ms ease;
+			transition: all 400ms ease;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			-webkit-transition: all 400ms ease;
+			transition: all 400ms ease;
+		}
+
+		/* handles the highlighting */
+		input:checked + .slider {
+			background-color: #2196f3;
+		}
+
+		/* handles the shadow? */
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196f3;
+		}
+
+		/* handles the animation */
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+
+		/* ROUNDMOD */
+		/* rounds out the BG */
+		.slider.round {
+			border-radius: 34px;
+		}
+		/* the dot */
+		.slider.round:before {
+			border-radius: 50%;
+		}
+	</style>
 </head>
 
 <body>
-<h1>This is a switch.</h1>
-<div>
-	<input type="checkbox" id="light">
-</div>
+<h2>This rectangular switch is off.</h2>
+<!-- box type switch -->
+<label class="switch">
+	<input id="square_switch" type="checkbox">
+	<span class="slider"></span>
+</label>
+
+<br>
+
+<h2>This rounded switch is off.</h2>
+<!-- rounded type switch -->
+<label class="switch">
+	<input id="round_switch" type="checkbox">
+	<span class="slider round"></span>
+</label>
+
 
 <script src="/socket.io/socket.io.js"></script>
+
 <script>
+	// ---------------
+	// --- handles ---
+	// ---------------
+	var square_switch = document.querySelector('#square_switch');
+	var round_switch = document.querySelector('#round_switch');
+	var headings = document.querySelectorAll('h2');
 	var socket = io();
 
+	// ---------------------
+	// --- socket events ---
+	// ---------------------
 	socket.on('connect', function() {
 		console.log('Connected!');
 	});
-
 	socket.on('message', (message) => {
 		console.log('a message from server. ');
 	});
+
+	// -----------------------
+	// --- standard events ---
+	// -----------------------
+	window.addEventListener('load', function(ev) {
+		console.log(`err thang loaded, yo`);
+	});
+
+	square_switch.addEventListener('change', function(e) {
+		console.log(square_switch.checked);
+
+		// do something with switch.checked
+		if (square_switch.checked) {
+			headings[0].innerHTML = 'This rectangular switch is on.';
+		} else {
+			headings[0].innerHTML = 'This rectangular switch is off.';
+		}
+	});
+
+	round_switch.addEventListener('change', function(e) {
+		if (round_switch.checked) {
+			headings[1].innerHTML = 'This rounded switch is on.';
+		} else {
+			headings[1].innerHTML = 'This rounded switch is off.';
+		}
+	});
+
+
+
 </script>
 </body>
 

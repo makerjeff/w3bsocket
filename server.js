@@ -1,6 +1,6 @@
 const http		= require('http').createServer(req_handler);
-const fs			= require('fs');
-const io			= require('socket.io')(http);
+const fs		= require('fs');
+const io		= require('socket.io')(http);
 const port		= process.argv[2] || 3000;
 
 
